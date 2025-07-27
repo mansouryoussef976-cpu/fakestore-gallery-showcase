@@ -22,47 +22,43 @@ export const ProductFilters = ({
   onCategoryChange,
 }: ProductFiltersProps) => {
   return (
-    <div className="bg-card p-6 rounded-xl shadow-card mb-8 animate-slide-up border border-border/50 hover:shadow-elegant transition-all duration-300">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="relative group">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 group-hover:text-primary transition-colors" />
+    <div className="bg-card p-6 rounded-lg shadow-card mb-8 animate-slide-up">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
           <Input
             type="text"
-            placeholder="ابحث عن المنتجات..."
+            placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-10 hover:border-primary/50 focus:border-primary transition-colors"
+            className="pl-10"
           />
         </div>
         
         <Select value={selectedCategory} onValueChange={onCategoryChange}>
-          <SelectTrigger className="hover:border-primary/50 transition-colors">
-            <SelectValue placeholder="جميع الفئات" />
+          <SelectTrigger>
+            <SelectValue placeholder="All Categories" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">جميع الفئات</SelectItem>
+            <SelectItem value="all">All Categories</SelectItem>
             {categories.map((category) => (
               <SelectItem key={category} value={category}>
-                {category === 'electronics' ? 'إلكترونيات' :
-                 category === "men's clothing" ? 'ملابس رجالية' :
-                 category === "women's clothing" ? 'ملابس نسائية' :
-                 category === 'jewelery' ? 'مجوهرات' :
-                 category.charAt(0).toUpperCase() + category.slice(1)}
+                {category.charAt(0).toUpperCase() + category.slice(1)}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         <Select value={sortBy} onValueChange={onSortChange}>
-          <SelectTrigger className="hover:border-primary/50 transition-colors">
-            <SelectValue placeholder="ترتيب حسب" />
+          <SelectTrigger>
+            <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="default">الافتراضي</SelectItem>
-            <SelectItem value="price-low">السعر: من الأقل للأعلى</SelectItem>
-            <SelectItem value="price-high">السعر: من الأعلى للأقل</SelectItem>
-            <SelectItem value="name">الاسم: أ - ي</SelectItem>
-            <SelectItem value="rating">التقييم: من الأعلى للأقل</SelectItem>
+            <SelectItem value="default">Default</SelectItem>
+            <SelectItem value="price-low">Price: Low to High</SelectItem>
+            <SelectItem value="price-high">Price: High to Low</SelectItem>
+            <SelectItem value="name">Name: A-Z</SelectItem>
+            <SelectItem value="rating">Rating: High to Low</SelectItem>
           </SelectContent>
         </Select>
       </div>

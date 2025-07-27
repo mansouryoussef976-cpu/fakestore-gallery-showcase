@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { ProductCard } from '../components/ProductCard';
 import { ProductFilters } from '../components/ProductFilters';
 import { LoadingSpinner } from '../components/LoadingSpinner';
-import { Button } from '../components/ui/button';
 import { useProducts } from '../hooks/useProducts';
 import { Product } from '../types/product';
 
@@ -57,13 +56,10 @@ export const Products = () => {
   
   if (error) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center animate-fade-in">
-        <div className="text-center p-8 bg-card rounded-xl shadow-card border border-destructive/20">
-          <h2 className="text-2xl font-bold text-destructive mb-4">خطأ في التحميل</h2>
-          <p className="text-muted-foreground mb-4">{error}</p>
-          <Button onClick={() => window.location.reload()} variant="outline">
-            إعادة المحاولة
-          </Button>
+      <div className="min-h-[400px] flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-destructive mb-2">Error</h2>
+          <p className="text-muted-foreground">{error}</p>
         </div>
       </div>
     );
@@ -71,12 +67,12 @@ export const Products = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-8 animate-fade-in text-center">
-        <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
-          اكتشف منتجات رائعة
+      <div className="mb-8 animate-fade-in">
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          Discover Amazing Products
         </h1>
-        <p className="text-lg text-muted-foreground">
-          تصفح مجموعتنا المكونة من {products.length} منتج مميز
+        <p className="text-muted-foreground">
+          Browse our collection of {products.length} premium products
         </p>
       </div>
 
@@ -91,27 +87,18 @@ export const Products = () => {
       />
 
       {filteredAndSortedProducts.length === 0 ? (
-        <div className="text-center py-16 animate-fade-in">
-          <div className="bg-card p-8 rounded-xl shadow-card border border-border/50 max-w-md mx-auto">
-            <h3 className="text-2xl font-semibold text-muted-foreground mb-4">
-              لا توجد منتجات
-            </h3>
-            <p className="text-muted-foreground">
-              جرب تعديل البحث أو الفلاتر للعثور على ما تبحث عنه
-            </p>
-          </div>
+        <div className="text-center py-12">
+          <h3 className="text-xl font-semibold text-muted-foreground mb-2">
+            No products found
+          </h3>
+          <p className="text-muted-foreground">
+            Try adjusting your search or filters
+          </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredAndSortedProducts.map((product, index) => (
-            <div 
-              key={product.id} 
-              className="animate-fade-in"
-              style={{ 
-                animationDelay: `${index * 0.1}s`,
-                animationFillMode: 'both'
-              }}
-            >
+            <div key={product.id} style={{ animationDelay: `${index * 0.1}s` }}>
               <ProductCard
                 product={product}
                 onProductClick={handleProductClick}
