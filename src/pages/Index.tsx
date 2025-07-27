@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Navbar } from '../components/Navbar';
+import { HeroSection } from '../components/HeroSection';
 import { Products } from './Products';
 
 const Index = () => {
@@ -13,7 +14,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar cartItemsCount={cartItemsCount} onCartClick={handleCartClick} />
-      <Products />
+      <main className="container mx-auto px-4 py-8">
+        <HeroSection />
+        <div className="mt-12">
+          <Products />
+        </div>
+      </main>
     </div>
   );
 };
